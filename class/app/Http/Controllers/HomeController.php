@@ -68,4 +68,14 @@ class HomeController extends Controller
         $leqture->save();
         return redirect()->back();
     }
+    public function change_class(Request $request,$id){
+        $students=User::findOrFail($id);
+        if ($students->classes()->detach($request->classes)==true){
+            $students->classes()->detach($request->classes);
+        }else{
+            $students->classes()->attach($request->classes);
+        }
+
+        return redirect()->back();
+    }
 }
